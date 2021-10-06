@@ -15,8 +15,7 @@ import javax.swing.JPanel;
     {
         private String name1, name2, name3;
         // Declare the int fields count1, count2, count3:
-
-        ________________________________________________________
+        private int count1, count2, count3;
 
         // Constructor
         public PollDisplayPanel(String nm1, String nm2, String nm3)
@@ -33,32 +32,28 @@ import javax.swing.JPanel;
         // Increments count1
         public void vote1()
         {
+            count1 +=1;
 
-            ______________________________________
         }
 
         // Increments count2
         public void vote2()
         {
+            count2 +=1;
 
-            ______________________________________
         }
 
         // Increments count3
         public void vote3()
         {
-
-            ______________________________________
+            count3 +=1;
         }
 
         // Returns a string representation of this object
         public String toString()
         {
-            return   _______________________________ +
+            return  name1+ " : " + count1 +"   "+ name2+ " : " + count2 +"   "+ name3+ " ; " + count3;
 
-                    ____________________________________ +
-
-                    ________________________________ ;
         }
 
         // Redefines JPanel's paintComponent to draw this pie chart
@@ -97,9 +92,17 @@ import javax.swing.JPanel;
                 degrees = countToDegrees(count1, total);
                 drawSector(g, x, y, r, fromDegree, degrees);
 
-                //_________________________________________________
+                fromDegree= fromDegree+degrees;
+                g.setColor(Color.GREEN);
+                degrees = countToDegrees(count2, total);
+                drawSector(g, x, y, r, fromDegree, degrees);
+                fromDegree = fromDegree+degrees;
+                g.setColor(Color.BLUE);
+                degrees = Math.max(360 - fromDegree, 0);
+                drawSector(g, x, y, r, fromDegree, degrees);
 
-                //...
+
+
             }
             else
             {
@@ -115,11 +118,11 @@ import javax.swing.JPanel;
             y += (r + 20);
             g.setColor(Color.BLACK);
 
-            //g.drawString( _______________ , x - r, y);
+            g.drawString(" "+ count1, x - r, y);
 
-            //g.drawString( _______________ , x, y);
+            g.drawString(" "+count2, x, y);
 
-            //g.drawString( _______________ , x + r, y);
+            g.drawString(" "+count3 , x + r, y);
 
 
             // Display the color squares:
@@ -137,8 +140,8 @@ import javax.swing.JPanel;
         // corresponds to count / total, rounded to the nearest integer.
         private int countToDegrees(int count, int total)
         {
-
-            return 0;
+            int x = (int) count*360/total;
+            return x;
         }
 
 
@@ -152,4 +155,3 @@ import javax.swing.JPanel;
                 g.fillArc(x - r, y - r, 2 * r, 2 * r, fromDegree, degrees);
         }
     }
-}
